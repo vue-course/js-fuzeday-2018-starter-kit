@@ -23,7 +23,7 @@ Vue.component('props-demo-simple', {
 ```
 
 
-b. frpm child to parent: use this.$emit() to notify the parent that something happened and it should be handled.
+b. from child to parent: use this.$emit() to notify the parent that something happened and it should be handled.
 
 ```
 this.$emit('emit-count',  this.count);

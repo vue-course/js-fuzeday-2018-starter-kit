@@ -25,10 +25,19 @@
 </template>
 
 <script>
+import { client } from '../services/shopify-client';
+
 	export default {
 		name: 'HelloWorld',
 		props: {
 			msg: String
+		},
+		mounted: function() {
+		 client.product.fetchAll()
+		 .then((products) => {
+			// Do something with the products
+			console.log(products);
+			});
 		}
 	}
 </script>

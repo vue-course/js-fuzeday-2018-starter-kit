@@ -1,9 +1,8 @@
 import Client from 'shopify-buy';
-
+import { creds } from '../conf';
 
 const client = Client.buildClient({
-	domain: 'your-shop-name.myshopify.com',
-	storefrontAccessToken: 'your-storefront-access-token'
+	domain: creds.domain,
+	storefrontAccessToken: creds.token
 });
-
 export {client};
