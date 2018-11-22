@@ -1,19 +1,19 @@
 # js-fuzeday-2018-starter-kit
 
 ### requirements:
-a. **Main products gallary page** includes:
+**Main products gallary page** includes:
   
   Header: 
    - search for products 
-   
+
    - cart icon with amount of selected items badge 
 
-b. **Selected product page** (route to it by selecting a product)
+**Selected product page** (route to it by selecting a product)
   - product model details to show:
 
     name, image, price, quantity, shipping method, Add to cart button, 
 
-c. **Cart products page**
+**Cart products page**
 The cart showing a list of the items you added to it and the following:
 
 For each product:
