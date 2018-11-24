@@ -13,7 +13,7 @@
 
     name, image, price, quantity, shipping method, Add to cart button, 
 
-**Cart products page**
+**Cart products page / popup**
 The cart showing a list of the items you added to it and the following:
 
 For each product:
