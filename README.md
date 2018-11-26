@@ -16,19 +16,20 @@
 **Cart products page / popup**
 The cart showing a list of the items you added to it and the following:
 
-For each product:
+### For each product:
 
-Image
-Price
-Name
-Quantity
-Shipping method
-Remove button (will remove the item from the cart list)
-Title of Cart and a back button to wherever you came from (item details or gallery)
-Buy All button
-Total price of all items.
+* Image
+* Price
+* Name
+* Quantity
+* Shipping method
+* Remove button (will remove the item from the cart list)
+* Title of Cart and a back button to wherever you came from (item details or gallery)
+* Buy All button
+* Total price of all items.
 
-###cheatsheet
+### cheatsheet
+
 - https://vuejs-tips.github.io/cheatsheet/
 
 a. Pass data from parent to child:
