@@ -34,9 +34,10 @@ import CartQuantity from '../components/CartQuantity.vue';
             }
         },
         methods: {
-            addToCart() {
+            async addToCart() {
                 const { id } = this.$route.params;
-                console.log('add', id);
+                const addToCart = await this.$store.dispatch('add', id, this.qty);
+                this.qty = 1;
             }
         }
     }
