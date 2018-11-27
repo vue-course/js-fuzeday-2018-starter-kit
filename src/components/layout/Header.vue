@@ -39,11 +39,7 @@ export default {
         },
         getProducts: async function () {
 
-            this.displayedProducts = this.search ?
-                this.products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0) :
-                this.products;
-
-            let products = await client.product.fetchAll(20)
+             let products = await client.product.fetchAll(20)
             if (this.search) {
                 products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
             }
@@ -52,6 +48,9 @@ export default {
             products = await client.product.fetchAll(100)
             if (this.search) {
                 products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
+            }
+            if (products.length === 0) {
+                products = [null];
             }
 
 
