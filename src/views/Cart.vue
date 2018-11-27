@@ -1,5 +1,7 @@
 <template>
   <div class="cart">
+    <p class="empty">Your cart is empty</p>
+
     <ul class="items">
       <li v-for="item in items">
         <cart-item v-bind:data="item" />
@@ -18,7 +20,7 @@ export default {
   name: 'Cart',
 	computed: {
 		items() {
-          return this.$store.getters.getProductsByIds;
+      return this.$store.getters.getProductsByIds;
 		}
 	},
     components: {
@@ -33,6 +35,7 @@ export default {
       list-style: none;
       padding: 0;
     }
+  }
 
   footer{
     display: flex;
@@ -43,5 +46,10 @@ export default {
       margin-left: auto;
     }
   }
+
+  .empty {
+    text-align: center;
+    font-size: 2em;
+    padding-top: 1em;
   }
 </style>
