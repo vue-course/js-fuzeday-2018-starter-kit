@@ -24,3 +24,29 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+    div{
+        display: inline-flex;
+        border: 1px solid #CCC;
+    }
+
+    input{
+        flex: 1;
+        border: none;
+        padding: 1em 0;
+        text-align: center;
+        width: 70px;
+        font-size: 1.2em;
+    }
+
+    button{
+        background: none;
+        border: 0;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: .9em;
+        padding: 0 1em;
+        outline: none;
+    }
+</style>
