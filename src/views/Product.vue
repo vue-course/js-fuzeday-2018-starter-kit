@@ -4,12 +4,29 @@
         <div><img :src="product.images[0].src" width="200" /></div>
         <div v-html="product.descriptionHtml" />
         <button @click="addToCart">Add to Cart</button>
+        <cart-quantity :quantity.sync="qty" />
+        quantity {{ qty }}
     </div>
 </template>
 
 <script>
+import CartQuantity from '../components/CartQuantity.vue';
+
     export default {
         name: 'Product',
+        props: {
+            quantity: {
+                default: 1
+            }
+        },
+        components: {
+            'cart-quantity': CartQuantity
+        },
+        data() {
+            return {
+                qty: this.quantity
+            }
+        },
         computed: {
             product() {
                 const { id } = this.$route.params;
@@ -28,5 +45,8 @@
 <style lang="scss" scoped>
     p {
         font-weight: bold;
+    }
+    button {
+        margin: 10px 0;
     }
 </style>
