@@ -4,9 +4,9 @@
             <input type='search' v-model="search" placeholder="Search" v-on:change="searchChanged($event)"/>
         </header>
         <ul>
-            <li v-for="productDetails in products">
+            <li v-for="productDetails in displayedProducts">
                 <single-product v-bind:product="productDetails"
-                                    v-bind:productSearch="search"></single-product>
+                                v-bind:productSearch="search"></single-product>
             </li>
         </ul>
         <mt-spinner class='loader' type="triple-bounce" color="red" size="100"></mt-spinner>
@@ -16,7 +16,7 @@
 <script>
     import {client} from '../services/shopify-client';
     import Product from "./SingleProduct";
-    import { Spinner } from 'mint-ui';
+    import {Spinner} from 'mint-ui';
 
     export default {
         name: 'ProductsList',
@@ -37,14 +37,13 @@
         },
         methods: {
             searchChanged(event) {
-                console.log('search change event', event)
                 this.search = event.target.value;
                 this.getProducts();
             },
             getProducts: async function () {
 
                 this.displayedProducts = this.search ?
-                    this.products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0):
+                    this.products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0) :
                     this.products;
 
                 let products = await client.product.fetchAll(20)
@@ -69,13 +68,15 @@
 </script>
 
 <style scoped lang="scss">
-   .loader{ display: none; }
+    .loader {
+        display: none;
+    }
 
     h3 {
         margin: 40px 0 0;
     }
 
-    header{
+    header {
     }
 
     input[type='search'] {
@@ -96,7 +97,7 @@
         padding: 1vw;
         list-style-type: none;
 
-        &:empty ~ .loader{
+        &:empty ~ .loader {
             display: block;
             text-align: center;
             margin: 5em 0;
