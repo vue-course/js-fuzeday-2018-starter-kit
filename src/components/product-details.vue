@@ -1,6 +1,6 @@
 <template>
     <router-link :to="{ name: 'product', params: { id: product.id }}" class='product-item'>
-        <img class="product-image" :src="imageUrl"/>
+        <img class="product-image" v-lazy="imageUrl"/>
         <div class='product-price'>
             <span>US </span>
             <span>$</span>
@@ -11,8 +11,13 @@
 </template>
 
 <script>
+    import { Lazyload } from 'mint-ui';
+
     export default {
         name: "product-details",
+        components: {
+			Lazyload
+		},
         computed: {
             imageUrl() {
                 let src = null;
@@ -67,7 +72,7 @@
             }
 
             &:active{
-                background: rgba(100,100,100,.1);
+                box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 4px 20px rgba(0,0,0,.2), 0 0 0 4px rgba(red, .2) inset;
                 transition: 0s;
             }
         }
@@ -96,7 +101,9 @@
         &-price{
             text-align: center;
             font-size: 1.6em;
+            font-weight: 700;
             margin: .6em 0;
+            color: red;
         }
     }
 </style>
