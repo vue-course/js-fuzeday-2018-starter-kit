@@ -1,7 +1,6 @@
 <template>
     <div v-if="product">
-
-        <a router-link :to="product.id"><h3 router-link class="product-title" :title="product.title">
+        <a router-link :to="{ name: 'product', params: { id: product.id }}"><h3 router-link class="product-title" :title="product.title">
             {{product.title}}</h3>
             <img class="product-image" :src="imageUrl"/>
         </a>
