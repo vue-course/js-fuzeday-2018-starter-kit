@@ -5,6 +5,7 @@
 			<div class="title">{{ data.title }}</div>
 			<div class="vendor">{{ data.vendor }}</div>
 			<div class="description">{{ data.description }}</div>
+			<div class="price">{{ price }}$</div>
 
 			<div class="actions">
 				<div class="quantity-text">Quantity: {{rangeValue}}</div>
@@ -41,6 +42,9 @@
 		computed: {
 			image() {
 				return this.data.images[0].src;
+			},
+			price() {
+				return parseFloat(this.data.variants[0].price) * this.data.qty ;
 			}
 		},
 		components: {
@@ -89,6 +93,11 @@
 			font-size: 12px;
 			font-weight: lighter;
 			display: block;
+			padding-bottom: 10px;
+		}
+
+		.price {
+
 		}
 
 		.actions {
