@@ -2,7 +2,7 @@
     <div>
         <input type='search' v-model="search" v-on:change="searchChanged($event)"/>
         <ul>
-            <li v-for="productDetails in products">
+            <li v-for="productDetails in displayedProducts">
                 <product-details v-bind:product="productDetails"
                                     v-bind:productSearch="search"></product-details>
             </li>
@@ -11,7 +11,7 @@
 
 
         <ul>
-            <li v-for="productDetails in products">
+            <li v-for="productDetails in displayedProducts">
                 <product-details v-bind:product="productDetails" :search="search"
                                  v-bind:productSearch="search"></product-details>
             </li>
@@ -29,7 +29,8 @@
         components: {'product-details': Product},
         data: function () {
             return {
-                search: ''
+                search: '',
+                displayedProducts: []
             };
         },
         computed: {
@@ -49,6 +50,11 @@
             },
             getProducts: async function () {
                 console.log('Get products')
+
+                this.displayedProducts = this.search ?
+                    this.products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0):
+                    this.products;
+
                 let products = await client.product.fetchAll(100)
                 console.log('products', products);
                 if (this.search) {
@@ -56,6 +62,7 @@
                     products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
                 }
                 this.$store.commit('setProducts', products);
+                this.displayedProducts  = this.products;
 
             }
         }
