@@ -1,6 +1,9 @@
 <template>
     <header>
         <router-link to="/"><div alt="Home" class="logo"  /></router-link>
+        <div class='search-wrap'>
+            <input type='search' v-model="search" placeholder="Search" v-on:change="searchChanged($event)"/>
+        </div>
         <router-link to="/cart" class='cart-btn'><img v-bind:src="cartIcon" /><span>{{ cart }}</span></router-link>
     </header>
 </template>
@@ -22,16 +25,50 @@ export default {
         cart() {
             return this.$store.getters.getCartLengh;
         }
+    },
+    methods: {
+        searchChanged(event) {
+            this.search = event.target.value;
+            this.getProducts();
+        },
+        getProducts: async function () {
+
+            this.displayedProducts = this.search ?
+                this.products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0) :
+                this.products;
+
+            let products = await client.product.fetchAll(20)
+            if (this.search) {
+                products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
+            }
+            this.displayedProducts = products;
+
+            products = await client.product.fetchAll(100)
+            if (this.search) {
+                products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
+            }
+
+
+            this.$store.commit('setProducts', products);
+
+        }
     }
 }
 </script>
 
 <style lang="scss" scoped>
     header {
-        background: #fff;
+        background: white;
         display: flex;
         justify-content: space-between;
         padding: 10px;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 20;
+        box-shadow: 0 20px 30px white;
     }
     .logo {
         background-size: 100%;
@@ -41,6 +78,21 @@ export default {
         width: 150px;
         height: 60px;
         display: inline-block;
+    }
+
+    .search-wrap{
+        flex: 1;
+    }
+
+    input[type='search'] {
+        display: block;
+        border: 1px solid #AAA;
+        border-radius: 3px;
+        padding: 1em;
+        max-width: 500px;
+        width: 100%;
+        margin: 0 auto;
+        font-size: 1.3em;
     }
 
     .cart-btn{
