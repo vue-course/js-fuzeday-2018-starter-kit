@@ -18,6 +18,7 @@
             <hr />
             <div class='product-desc' v-html="product.descriptionHtml" />
         </div>
+
     </div>
 </template>
 
