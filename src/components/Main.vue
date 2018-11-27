@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Navbar/>
+        <Navbar v-on:search:product="searchProduct($event)"/>
         <router-view/>
     </div>
 </template>
@@ -12,6 +12,13 @@ export default {
     name: 'Main',
     components: {
         Navbar
+    },
+    methods: {
+        searchProduct(searchText) {
+            console.log('search product', searchText)
+            this.$router.push(`/productSearch/${searchText}`)
+
+        }
     }
 }
 </script>

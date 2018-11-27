@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="product">
         <router-link to="/">Back to products</router-link>
         <div><img :src="product.images[0].src" width="200" /></div>
         <div v-html="product.descriptionHtml" />

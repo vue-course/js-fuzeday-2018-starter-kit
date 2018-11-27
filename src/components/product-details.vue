@@ -6,7 +6,7 @@
             <span>$</span>
             <span>{{product.variants[0].price}}</span>
         </div>
-        <div router-link class="product-title">{{product.title}}</div>
+        <div router-link class="product-title">{{markBySearch(productSearch, product.title)}}</div>
     </router-link>
 </template>
 
@@ -24,7 +24,15 @@
                 return src;
             }
         },
-        props: ['product', 'displayMode']
+        methods: {
+          markBySearch(search, title) {
+              if (!search) {
+                  return title;
+              }
+              return title;
+          }
+        },
+        props: ['product', 'displayMode', 'productSearch']
     }
 </script>
 
