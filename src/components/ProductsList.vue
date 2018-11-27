@@ -1,6 +1,5 @@
 <template>
     <div>
-        <input type='search' v-model="search" v-on:change="searchChanged($event)"/>
         <ul v-if="!displayedProducts.length">
             <li v-for="item in 10" class="loading">
                 <loading :height="180" />
@@ -9,26 +8,12 @@
                 <loading />
             </li>
         </ul>
-
-        <header>
-            <input type='search' v-model="search" placeholder="Search" v-on:change="searchChanged($event)"/>
-        </header>
-        
-        <ul>
-            <li v-for="productDetails in displayedProducts">
-                <single-product v-bind:product="productDetails"
-                                v-bind:productSearch="search"></single-product>
-            </li>
-        </ul>
-
-
         <ul>
             <li v-for="productDetails in displayedProducts">
                 <single-product v-bind:product="productDetails" :search="search"
                                  v-bind:productSearch="search"></single-product>
             </li>
         </ul>
-
     </div>
 </template>
 
@@ -45,65 +30,24 @@
         },
         data() {
             return {
-                search: '', 
+                search: '',
                 displayedProducts: []
             };
         },
         computed: {
             products() {
                 return this.$store.getters.getProducts;
-            },
-
+            }
         },
         mounted: function () {
             this.getProducts();
-        },
-        methods: {
-            searchChanged(event) {
-                this.search = event.target.value;
-                this.getProducts();
-            },
-            getProducts: async function () {
-                this.displayedProducts = this.search ?
-                    this.products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0) :
-                    this.products;
-
-                let products = await client.product.fetchAll(20)
-                if (this.search) {
-                    products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
-                }
-                this.displayedProducts = products;
-
-                products = await client.product.fetchAll(100)
-                if (this.search) {
-                    products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
-                }
-
-
-                this.$store.commit('setProducts', products);
-
-            }
         }
     }
 </script>
 
 <style scoped lang="scss">
-    .loader {
-        display: none;
-    }
-
     h3 {
         margin: 40px 0 0;
-    }
-
-    input[type='search'] {
-        display: block;
-        border: 1px solid #AAA;
-        border-radius: 3px;
-        padding: 1em;
-        width: 500px;
-        margin: 0 auto;
-        font-size: 1.3em;
     }
 
     ul {

@@ -50,7 +50,7 @@ import CartQuantity from '../components/CartQuantity.vue';
         methods: {
             async addToCart() {
                 const { id } = this.$route.params;
-                const addToCart = await this.$store.dispatch('add', id, this.qty);
+                const addToCart = await this.$store.dispatch('add', { id, qty: this.qty });
                 this.qty = 1;
             }
         }
@@ -106,7 +106,7 @@ import CartQuantity from '../components/CartQuantity.vue';
 
     .product-price{
         font-size: 2.5em;
-        color: red;
+        color: #06EF81;
     }
 
     .product-desc{

@@ -35,7 +35,7 @@
 		},
 		data() {
 			return {
-				rangeValue: this.data.quantity
+				rangeValue: this.data.qty
 			}
 		},
 		computed: {

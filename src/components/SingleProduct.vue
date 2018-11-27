@@ -77,7 +77,7 @@
             }
 
             &:active{
-                box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 4px 20px rgba(0,0,0,.2), 0 0 0 4px rgba(red, .2) inset;
+                box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 4px 20px rgba(0,0,0,.2), 0 0 0 4px rgba(#06EF81, .2) inset;
                 transition: 0s;
             }
         }
@@ -108,7 +108,7 @@
             font-size: 1.6em;
             font-weight: 700;
             margin: .6em 0;
-            color: red;
+            color: #06EF81;
         }
     }
 </style>
