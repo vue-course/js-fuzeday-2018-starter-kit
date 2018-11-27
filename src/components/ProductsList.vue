@@ -18,9 +18,6 @@
     export default {
         name: 'ProductsList',
         components: {'product-details': Product},
-        props: {
-            msg: String
-        },
         computed: {
             products() {
                 return this.$store.getters.getProducts;
@@ -35,7 +32,6 @@
     }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
     h3 {
         margin: 40px 0 0;
@@ -43,15 +39,21 @@
 
     ul {
         display: grid;
-        grid-gap: 1%;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-
+        grid-auto-rows: 1fr;
+        grid-gap: 1vw;
+        padding: 1vw;
         list-style-type: none;
-        padding: 1%;
     }
 
     li {
         box-sizing: border-box;
+        background: white;
+
+        &:hover{
+            position: relative;
+            z-index: 10;
+        }
         // width: calc(100% / 6);
     }
 </style>
