@@ -1,5 +1,5 @@
 export default {
-    add ({ commit }, id, qty) {
+    add ({ commit }, { id, qty }) {
         commit("ADD_TO_CART", { id, qty });
     },
     remove ({ commit }, id) {

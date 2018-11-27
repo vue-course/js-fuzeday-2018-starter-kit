@@ -10,6 +10,7 @@
 
 <script>
 // import cartIcon from '../../assets/icons/shopping-basket.svg';
+import {client} from '../../services/shopify-client';
 
 export default {
     name: 'Header',
@@ -18,7 +19,8 @@ export default {
     },
     data() {
         return {
-            cartIcon: ''
+            cartIcon: '',
+            search: ''
         };
     },
     computed: {
@@ -26,6 +28,10 @@ export default {
             return this.$store.getters.getCartLengh;
         }
     },
+    mounted: function() {
+        this.getProducts();
+    },
+
     methods: {
         searchChanged(event) {
             this.search = event.target.value;
