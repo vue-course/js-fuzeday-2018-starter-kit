@@ -1,14 +1,9 @@
 <template>
-    <div class="hello">
-        <h3>
-            Products
-            <ul>
-                <li v-for="productDetails in products">
-                    <product-details v-bind:product="productDetails"></product-details>
-                </li>
-            </ul>
-        </h3>
-    </div>
+    <ul>
+        <li v-for="productDetails in products">
+            <product-details v-bind:product="productDetails"></product-details>
+        </li>
+    </ul>
 </template>
 
 <script>
