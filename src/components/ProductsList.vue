@@ -1,8 +1,5 @@
 <template>
     <div>
-        <header>
-            <input type='search' v-model="search" placeholder="Search" v-on:change="searchChanged($event)"/>
-        </header>
         <ul>
             <li v-for="productDetails in displayedProducts">
                 <single-product v-bind:product="productDetails"
@@ -23,7 +20,8 @@
         components: {'single-product': Product, Spinner},
         data: function () {
             return {
-                search: '', displayedProducts: []
+                search: '',
+                displayedProducts: []
             };
         },
         computed: {
@@ -68,25 +66,8 @@
 </script>
 
 <style scoped lang="scss">
-    .loader {
-        display: none;
-    }
-
     h3 {
         margin: 40px 0 0;
-    }
-
-    header {
-    }
-
-    input[type='search'] {
-        display: block;
-        border: 1px solid #AAA;
-        border-radius: 3px;
-        padding: 1em;
-        width: 500px;
-        margin: 0 auto;
-        font-size: 1.3em;
     }
 
     ul {
