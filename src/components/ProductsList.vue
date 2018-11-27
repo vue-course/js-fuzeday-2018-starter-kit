@@ -4,26 +4,26 @@
             <input type='search' v-model="search" placeholder="Search" v-on:change="searchChanged($event)"/>
         </header>
         <ul>
-            <li v-for="productDetails in products">
-                <product-details v-bind:product="productDetails"
-                                    v-bind:productSearch="search"></product-details>
+            <li v-for="productDetails in displayedProducts">
+                <single-product v-bind:product="productDetails"
+                                v-bind:productSearch="search"></single-product>
             </li>
         </ul>
-        <mt-spinner class='loader' type="triple-bounce" color="red" size="100"></mt-spinner>
+        <!--<mt-spinner class='loader' type="triple-bounce" color="red" size="100"></mt-spinner>-->
     </div>
 </template>
 
 <script>
     import {client} from '../services/shopify-client';
-    import Product from "./product-details";
-    import { Spinner } from 'mint-ui';
+    import Product from "./SingleProduct";
+    import {Spinner} from 'mint-ui';
 
     export default {
         name: 'ProductsList',
-        components: {'product-details': Product, Spinner},
+        components: {'single-product': Product, Spinner},
         data: function () {
             return {
-                search: ''
+                search: '', displayedProducts: []
             };
         },
         computed: {
@@ -37,18 +37,27 @@
         },
         methods: {
             searchChanged(event) {
-                console.log('search change event', event)
                 this.search = event.target.value;
                 this.getProducts();
             },
             getProducts: async function () {
-                console.log('Get products')
-                let products = await client.product.fetchAll(30)
 
+                this.displayedProducts = this.search ?
+                    this.products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0) :
+                    this.products;
+
+                let products = await client.product.fetchAll(20)
                 if (this.search) {
-                    console.log('filtering products by', this.search)
                     products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
                 }
+                this.displayedProducts = products;
+
+                products = await client.product.fetchAll(100)
+                if (this.search) {
+                    products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
+                }
+
+
                 this.$store.commit('setProducts', products);
 
             }
@@ -59,13 +68,15 @@
 </script>
 
 <style scoped lang="scss">
-   .loader{ display: none; }
+    .loader {
+        display: none;
+    }
 
     h3 {
         margin: 40px 0 0;
     }
 
-    header{
+    header {
     }
 
     input[type='search'] {
@@ -86,7 +97,7 @@
         padding: 1vw;
         list-style-type: none;
 
-        &:empty ~ .loader{
+        &:empty ~ .loader {
             display: block;
             text-align: center;
             margin: 5em 0;
