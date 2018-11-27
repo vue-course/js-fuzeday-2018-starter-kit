@@ -1,36 +1,29 @@
 <template>
     <div>
-        <input type='search' v-model="search" placeholder="Search" v-on:change="searchChanged($event)"/>
+        <header>
+            <input type='search' v-model="search" placeholder="Search" v-on:change="searchChanged($event)"/>
+        </header>
         <ul>
-            <li v-for="productDetails in displayedProducts">
+            <li v-for="productDetails in products">
                 <single-product v-bind:product="productDetails"
                                     v-bind:productSearch="search"></single-product>
             </li>
         </ul>
-
-
-
-        <ul>
-            <li v-for="productDetails in displayedProducts">
-                <single-product v-bind:product="productDetails" :search="search"
-                                 v-bind:productSearch="search"></single-product>
-            </li>
-        </ul>
-
+        <mt-spinner class='loader' type="triple-bounce" color="red" size="100"></mt-spinner>
     </div>
 </template>
 
 <script>
     import {client} from '../services/shopify-client';
     import Product from "./SingleProduct";
+    import { Spinner } from 'mint-ui';
 
     export default {
         name: 'ProductsList',
-        components: {'single-product': Product},
+        components: {'single-product': Product, Spinner},
         data: function () {
             return {
-                search: '',
-                displayedProducts: []
+                search: ''
             };
         },
         computed: {
@@ -44,6 +37,7 @@
         },
         methods: {
             searchChanged(event) {
+                console.log('search change event', event)
                 this.search = event.target.value;
                 this.getProducts();
             },
@@ -66,7 +60,6 @@
 
 
                 this.$store.commit('setProducts', products);
-                this.displayedProducts  = this.products;
 
             }
         }
@@ -76,15 +69,23 @@
 </script>
 
 <style scoped lang="scss">
+   .loader{ display: none; }
+
     h3 {
         margin: 40px 0 0;
     }
 
-    input[type='search'] {
-        border-radius: 20px;
-        border: solid lightblue;
-        line-height: 2;
+    header{
+    }
 
+    input[type='search'] {
+        display: block;
+        border: 1px solid #AAA;
+        border-radius: 3px;
+        padding: 1em;
+        width: 500px;
+        margin: 0 auto;
+        font-size: 1.3em;
     }
 
     ul {
@@ -94,6 +95,12 @@
         grid-gap: 1vw;
         padding: 1vw;
         list-style-type: none;
+
+        &:empty ~ .loader{
+            display: block;
+            text-align: center;
+            margin: 5em 0;
+        }
     }
 
     li {
