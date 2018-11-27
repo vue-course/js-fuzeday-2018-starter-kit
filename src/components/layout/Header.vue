@@ -1,6 +1,6 @@
 <template>
     <header>
-        Header
+        <router-link to="/"><div alt="Home" class="logo"  /></router-link>
         <router-link to="/cart">Cart {{ cart }}</router-link>
     </header>
 </template>
@@ -18,9 +18,18 @@ export default {
 
 <style lang="scss" scoped>
     header {
-        background: #efefef;
+        background: #fff;
         display: flex;
         justify-content: space-between;
         padding: 10px;
+    }
+    .logo {
+        background-size: 100%;
+        background-position: -10px -33px;
+        background-repeat: no-repeat;
+        background-image: url("../../assets/logo.png");
+        width: 150px;
+        height: 60px;
+        display: inline-block;
     }
 </style>
