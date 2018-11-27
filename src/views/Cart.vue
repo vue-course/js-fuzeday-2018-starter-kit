@@ -1,6 +1,6 @@
 <template>
   <div class="cart">
-    <p class="empty">Your cart is empty</p>
+    <p class="empty" v-if="!items.length">Your cart is empty</p>
 
     <ul class="items">
       <li v-for="item in items">
@@ -34,6 +34,12 @@ export default {
     ul {
       list-style: none;
       padding: 0;
+
+      &:empty{
+        ~ footer{
+          display: none;
+        }
+      }
     }
   }
 
