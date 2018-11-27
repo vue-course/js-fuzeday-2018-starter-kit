@@ -3,8 +3,8 @@
         <input type='search' v-model="search" placeholder="Search" v-on:change="searchChanged($event)"/>
         <ul>
             <li v-for="productDetails in displayedProducts">
-                <product-details v-bind:product="productDetails"
-                                    v-bind:productSearch="search"></product-details>
+                <single-product v-bind:product="productDetails"
+                                    v-bind:productSearch="search"></single-product>
             </li>
         </ul>
 
@@ -12,8 +12,8 @@
 
         <ul>
             <li v-for="productDetails in displayedProducts">
-                <product-details v-bind:product="productDetails" :search="search"
-                                 v-bind:productSearch="search"></product-details>
+                <single-product v-bind:product="productDetails" :search="search"
+                                 v-bind:productSearch="search"></single-product>
             </li>
         </ul>
 
@@ -22,11 +22,11 @@
 
 <script>
     import {client} from '../services/shopify-client';
-    import Product from "./product-details";
+    import Product from "./SingleProduct";
 
     export default {
         name: 'ProductsList',
-        components: {'product-details': Product},
+        components: {'single-product': Product},
         data: function () {
             return {
                 search: '',
