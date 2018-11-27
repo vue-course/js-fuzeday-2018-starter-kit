@@ -5,8 +5,8 @@
         </header>
         <ul>
             <li v-for="productDetails in products">
-                <product-details v-bind:product="productDetails"
-                                    v-bind:productSearch="search"></product-details>
+                <single-product v-bind:product="productDetails"
+                                    v-bind:productSearch="search"></single-product>
             </li>
         </ul>
         <mt-spinner class='loader' type="triple-bounce" color="red" size="100"></mt-spinner>
@@ -15,12 +15,12 @@
 
 <script>
     import {client} from '../services/shopify-client';
-    import Product from "./product-details";
+    import Product from "./SingleProduct";
     import { Spinner } from 'mint-ui';
 
     export default {
         name: 'ProductsList',
-        components: {'product-details': Product, Spinner},
+        components: {'single-product': Product, Spinner},
         data: function () {
             return {
                 search: ''
@@ -42,13 +42,23 @@
                 this.getProducts();
             },
             getProducts: async function () {
-                console.log('Get products')
-                let products = await client.product.fetchAll(30)
 
+                this.displayedProducts = this.search ?
+                    this.products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0):
+                    this.products;
+
+                let products = await client.product.fetchAll(20)
                 if (this.search) {
-                    console.log('filtering products by', this.search)
                     products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
                 }
+                this.displayedProducts = products;
+
+                products = await client.product.fetchAll(100)
+                if (this.search) {
+                    products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
+                }
+
+
                 this.$store.commit('setProducts', products);
 
             }
