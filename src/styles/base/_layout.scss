@@ -35,6 +35,17 @@ body{
 
     @include breakpoint(handheld){
         font-size: .8em;
+        padding-top: 16em;
+
+        .main-header{
+            padding-bottom: 6em;
+            .search-wrap{
+                position: absolute;
+                left: 1em;
+                right: 1em;
+                top: 9em;
+            }
+        }
     }
 }
 

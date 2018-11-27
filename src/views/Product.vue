@@ -109,7 +109,7 @@ import { Toast } from 'mint-ui';
         }
 
         button{
-            width: 50%;
+            max-width: 50%;
             max-width: 350px;
         }
     }

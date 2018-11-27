@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header class='main-header'>
         <router-link to="/"><div alt="Home" class="logo"  /></router-link>
         <div class='search-wrap'>
             <input type='search' v-model="search" placeholder="Search" v-on:change="searchChanged($event)"/>
