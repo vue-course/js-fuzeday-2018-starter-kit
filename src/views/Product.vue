@@ -25,6 +25,7 @@
 
 <script>
 import CartQuantity from '../components/CartQuantity.vue';
+import { Toast } from 'mint-ui';
 
     export default {
         name: 'Product',
@@ -34,7 +35,8 @@ import CartQuantity from '../components/CartQuantity.vue';
             }
         },
         components: {
-            'cart-quantity': CartQuantity
+            'cart-quantity': CartQuantity,
+            Toast
         },
         data() {
             return {
@@ -52,6 +54,14 @@ import CartQuantity from '../components/CartQuantity.vue';
                 const { id } = this.$route.params;
                 const addToCart = await this.$store.dispatch('add', { id, qty: this.qty });
                 this.qty = 1;
+
+
+                Toast({
+                    message: 'Added to Cart',
+                    position: 'bottom',
+                    duration: 1500,
+                    className : 'toaster'
+                });
             }
         }
     }
