@@ -23,7 +23,7 @@
         components: {'single-product': Product, Spinner},
         data: function () {
             return {
-                search: ''
+                search: '', displayedProducts: []
             };
         },
         computed: {
