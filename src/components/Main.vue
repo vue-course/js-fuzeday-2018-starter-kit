@@ -15,7 +15,6 @@ export default {
     },
     methods: {
         searchProduct(searchText) {
-            console.log('search product', searchText)
             this.$router.push(`/productSearch/${searchText}`)
 
         }

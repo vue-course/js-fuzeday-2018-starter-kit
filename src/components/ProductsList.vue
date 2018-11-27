@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input type='search' v-model="search" v-on:change="searchChanged($event)"/>
+        <input type='search' v-model="search" placeholder="Search" v-on:change="searchChanged($event)"/>
         <ul>
             <li v-for="productDetails in displayedProducts">
                 <product-details v-bind:product="productDetails"
@@ -44,12 +44,10 @@
         },
         methods: {
             searchChanged(event) {
-                console.log('search change event', event)
                 this.search = event.target.value;
                 this.getProducts();
             },
             getProducts: async function () {
-                console.log('Get products')
 
                 this.displayedProducts = this.search ?
                     this.products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0):
@@ -62,9 +60,7 @@
                 this.displayedProducts = products;
 
                 products = await client.product.fetchAll(100)
-                console.log('products', products);
                 if (this.search) {
-                    console.log('filtering products by', this.search)
                     products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
                 }
 
