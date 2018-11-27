@@ -15,7 +15,7 @@ export default {
     name: 'Cart',
 	computed: {
 		items() {
-			return this.$store.state.cart;
+          return this.$store.getters.getProductsByIds;
 		}
 	},
     components: {

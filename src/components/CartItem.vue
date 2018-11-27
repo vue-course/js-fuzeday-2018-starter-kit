@@ -1,6 +1,6 @@
 <template>
 	<div class="cart-item">
-		<img class="image" v-bind:src="data.image">
+		<img class="image" v-bind:src="image">
 		<div class="text">
 			<div class="title">{{ data.title }}</div>
 			<div class="vendor">{{ data.vendor }}</div>
@@ -36,6 +36,11 @@
 		data() {
 			return {
 				rangeValue: this.data.quantity
+			}
+		},
+		computed: {
+			image() {
+				return this.data.images[0].src;
 			}
 		},
 		components: {
