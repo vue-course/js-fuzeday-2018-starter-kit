@@ -39,6 +39,7 @@
             min-height: 100%;
             box-sizing: inherit;
             border-radius: 3px;
+            user-select: none;
             transition: .12s ease-out;
 
             cursor: pointer;
@@ -50,17 +51,24 @@
 
                 .product-title{
                     -webkit-line-clamp: 20;
+                    opacity: 1;
                 }
 
                 .product-image{
                     transform: none;
                 }
             }
+
+            &:active{
+                background: rgba(100,100,100,.1);
+                transition: 0s;
+            }
         }
 
         &-title {
             font-weight: 400;
             width: 100%;
+            opacity: .8;
             /* white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis; */
@@ -75,7 +83,7 @@
             display: block;
             width: 100%;
             transition: .12s ease-out;
-            transform: scale(.9);
+            transform: scale(.95);
         }
 
         &-price{
