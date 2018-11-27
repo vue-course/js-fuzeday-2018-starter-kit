@@ -1,13 +1,21 @@
 <template>
     <div>
         <input type='search' v-model="search" v-on:change="searchChanged($event)"/>
+        <!-- <ul v-if="!displayedProducts.length">
+            <li v-for="item in 10" class="loading">
+                <loading :height="100" />
+                <loading />
+                <loading />
+                <loading />
+            </li>
+        </ul> -->
+
         <ul>
             <li v-for="productDetails in displayedProducts">
                 <product-details v-bind:product="productDetails"
                                     v-bind:productSearch="search"></product-details>
             </li>
         </ul>
-
 
 
         <ul>
@@ -22,11 +30,15 @@
 
 <script>
     import {client} from '../services/shopify-client';
-    import Product from "./product-details";
+    import Product from "./ProductDetails";
+    import SkeletonLoading from "./SkeletonLoading";
 
     export default {
         name: 'ProductsList',
-        components: {'product-details': Product},
+        components: {
+            ProductDetails: Product,
+            Loading: SkeletonLoading
+        },
         data: function () {
             return {
                 search: '',
@@ -101,5 +113,8 @@
             z-index: 10;
         }
         // width: calc(100% / 6);
+    }
+    .loading {
+        margin-bottom: 5%;
     }
 </style>
