@@ -3,7 +3,7 @@ export default {
         return products
     },
     getProduct: ({ products }) => id => {
-        return products.find(product => product.id == id);
+        return products.find(product => product && product.id == id);
     },
     getCartLengh: ({ cart }) => cart.length,
     getProductsByIds: state => {
