@@ -10,8 +10,8 @@
         </ul>
         <ul>
             <li v-for="productDetails in displayedProducts">
-                <product-details v-bind:product="productDetails" :search="search"
-                                 v-bind:productSearch="search"></product-details>
+                <single-product v-bind:product="productDetails" :search="search"
+                                 v-bind:productSearch="search"></single-product>
             </li>
         </ul>
     </div>
@@ -19,18 +19,16 @@
 
 <script>
     import {client} from '../services/shopify-client';
-    import Product from "./ProductDetails";
     import SkeletonLoading from "./SkeletonLoading";
-    import Product from "./SingleProduct";
+    import SingleProduct from "./SingleProduct";
 
     export default {
         name: 'ProductsList',
         components: {
-            ProductDetails: Product,
+            SingleProduct,
             Loading: SkeletonLoading
         },
-        components: {'single-product': Product, Spinner},
-        data: function () {
+        data() {
             return {
                 search: '',
                 displayedProducts: []
