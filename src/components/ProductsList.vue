@@ -48,7 +48,12 @@
 
     li {
         box-sizing: border-box;
-        position: relative;
+        background: white;
+
+        &:hover{
+            position: relative;
+            z-index: 10;
+        }
         // width: calc(100% / 6);
     }
 </style>
