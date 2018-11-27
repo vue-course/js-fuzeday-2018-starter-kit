@@ -63,7 +63,6 @@
 
     ul {
         display: grid;
-        // grid-gap: 1%;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         grid-auto-rows: 1fr;
         grid-gap: 1vw;
