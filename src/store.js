@@ -41,12 +41,18 @@ export default new Vuex.Store({
   },
   actions: {
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 =======
 		remove ({ commit }, id) {
 			commit('REMOVE_FROM_CART', id)
 		},
 >>>>>>> b7f5085b7d4914e69d2eb4ed3c0f607a6079dd4e
+=======
+		remove ({ commit }, id) {
+			commit('REMOVE_FROM_CART', id)
+		},
+>>>>>>> b09b5c0ef0b3e2bf48fc1b42cde018ba01e75c65
   },
 	getters: {
 		getProducts: ({ products }) => {
