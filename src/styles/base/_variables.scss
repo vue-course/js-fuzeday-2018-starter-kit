@@ -1,0 +1,44 @@
+// Easing
+$ease-out     : cubic-bezier(.15,.53,.34,1);
+$ease-double  : cubic-bezier(.5,0,.5,1);
+$ease-outBack : cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$ease-inOut   : cubic-bezier(.7,.15,.36,1);
+
+
+
+$colors: (
+  gray1      : #333,
+  gray2      : #666,
+  gray3      : #999,
+  gray4      : #CCC,
+  gray5      : #EEE,
+  gray6      : #F1F1F1,
+  blue       : #00b2ff,
+  red        : #f53d3d,
+  darkblue   : #0354b5
+);
+
+
+$typography : (
+    font-family    : ('Ubuntu', Arial, sans-serif),
+    base-font-size : 14px
+);
+
+
+$breakpoints : (
+    xl       : 1680px,
+    l        : 1366px,
+    ml       : 1163px,
+    m        : 960px,
+    s        : 800px,
+    handheld : 480px
+);
+
+
+$layout : (
+  min-width     : 1000px,
+  side-padding  : 20px,
+  border-radius : 4px,
+  grid-gap      : 20px,
+  input-height  : 38px
+);

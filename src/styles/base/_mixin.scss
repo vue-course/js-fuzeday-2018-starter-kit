@@ -1,0 +1,235 @@
+/////////////////////
+// By Yair Even Or
+
+// map-get helper
+@function mg($map, $key) {
+    @if map-has-key($map, $key) {
+        @return map-get($map, $key);
+    }
+
+  //  @warn "Unknown `#{$key}` in #{$map}.";
+    @return null;
+}
+
+@function default($key:"") {
+    @return mg($default, $key);
+}
+
+@function typography($key:"") {
+    @return mg($typography, $key);
+}
+
+@function layout($key:"") {
+    @return mg($layout, $key);
+}
+
+
+// Get Color
+@function C($key:"", $opacity:"") {
+    @if $key == "" {
+        @return 'inherit';
+    }
+
+    $key : if(mg($colors, $key), mg($colors, $key), $key);
+
+    @if $opacity != "" {
+        @return rgba($key, $opacity);
+    }
+
+    @return $key;
+}
+
+@function getRandomColor() {
+    $s-min: 20;
+    $s-max: 70;
+    $l-min: 30;
+    $l-max: 90;
+
+    @return hsl( random(360), $s-min + random($s-max + -$s-min),$l-min + random($l-max + -$l-min) );
+}
+
+@mixin fluid-type($properties, $min-vw, $max-vw, $min-value, $max-value) {
+    &{
+        @each $property in $properties {
+            #{$property}: $min-value;
+        }
+
+        @media screen and (min-width: $min-vw) {
+            @each $property in $properties {
+                #{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+            }
+        }
+
+        @media screen and (min-width: $max-vw) {
+            @each $property in $properties {
+                #{$property}: $max-value;
+            }
+        }
+    }
+}
+
+
+// Remove units from a number.
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+
+    @return $number;
+}
+
+@mixin trimmedLine(){
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+
+
+@mixin breakpoint($key:"", $rule:'max-width'){
+    $value : null;
+    @if map-has-key($breakpoints, $key) {
+        $value : mg($breakpoints, $key);
+    }
+    @else {
+        $value : $key;
+    }
+    @media screen and (#{$rule} : #{$value} ){
+        @content;
+    }
+}
+
+
+@mixin n-columns($min-width, $gutter, $last-equal:false, $max-cols:5, $selector:'.colItem'){
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -$gutter;
+    // margin-top: -$gutter;
+    position: relative;
+    top: -$gutter;
+
+    > #{$selector} {
+        flex: 1 0 auto;
+        margin-left: $gutter;
+        margin-top: $gutter;
+        min-width: calc(#{$min-width} - #{$gutter});
+
+        @if $last-equal {
+            @for $i from 2 through $max-cols {
+                $screen-width: ($min-width*$i)+($gutter*$i);
+                $column-width: (100%/$i);
+                @media( min-width: $screen-width) {
+                    max-width: calc(#{$column-width} - #{$gutter});
+                }
+            }
+
+            $column-width: (100%/$max-cols);
+            @media( min-width: $min-width*$max-cols) {
+                min-width: calc(#{$column-width} - #{$gutter});
+            }
+        }
+    }
+}
+
+
+@mixin arrow_helper($arrowSize, $arrowColor, $margin, $side, $align) {
+    @if $side == "top" {
+        border-bottom-color: $arrowColor;
+        top: -2 * $arrowSize;
+    }
+    @if $side == "bottom" {
+        border-top-color: $arrowColor;
+        @if $align == 'after' {
+            bottom: -$arrowSize;
+        }
+        @else{
+            bottom: -2 * $arrowSize;
+        }
+    }
+    @if $side == "left" {
+        border-right-color: $arrowColor;
+        left: -2 * $arrowSize;
+    }
+    @if $side == "right" {
+        border-left-color: $arrowColor;
+        right: -2 * $arrowSize;
+    }
+    @if $side == "right" or $side == "left" {
+        @if $align == "center" {
+            top: 50%;
+            margin-top: -$arrowSize;
+        }
+        @else if $align == "top" {
+            top: $margin;
+        }
+        @else if $align == "bottom" {
+            bottom: $margin;
+        }
+        @else if $align == "after" {
+            vertical-align: middle;
+
+        }
+    }
+    @if $side == "bottom" or $side == "top" {
+        @if $align == "center" {
+            right: 50%;
+            margin-right: -$arrowSize;
+        }
+        @else if $align == "left" {
+            left: $margin;
+        }
+        @else if $align == "right" {
+            right: $margin;
+        }
+    }
+}
+
+@mixin arrow($side:"right", $align:"center", $size:20px, $color:#f6f6f6, $borderColor:"none", $borderSize:3px) {
+    $selector: "&:after, &:before";
+    @if $borderColor == "none" {
+        $selector: "&:after";
+    }
+    #{$selector} {
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        border-width: $size;
+        @if $align != 'after' {
+            position: absolute;
+            pointer-events: none;
+        }
+        @else{
+            position:relative;
+            display:inline-block;
+        }
+        visibility: visible;
+    }
+
+    &:after {
+        @include arrow_helper($size, $color, $size, $side, $align);
+    }
+
+    @if $borderColor != "none" {
+        &:before {
+            border-width: $borderSize + $size;
+            @include arrow_helper($size + $borderSize, $borderColor, $size - $borderSize, $side, $align);
+        }
+    }
+}
+
+@mixin aspect($ratio: 1 1, $selector: "> :first-child") {
+    $selector: unquote($selector);
+
+    padding-bottom: percentage(nth($ratio, 2) / nth($ratio, 1));
+    position: relative;
+
+    #{$selector} {
+        content  : '';
+        position : absolute;
+        top      : 0;
+        right    : 0;
+        bottom   : 0;
+        left     : 0;
+    }
+}
