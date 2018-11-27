@@ -1,19 +1,23 @@
 <template>
     <div>
         <input type='search' v-model="search" v-on:change="searchChanged($event)"/>
-        <!-- <ul v-if="!displayedProducts.length">
+        <ul v-if="!displayedProducts.length">
             <li v-for="item in 10" class="loading">
                 <loading :height="100" />
                 <loading />
                 <loading />
                 <loading />
             </li>
-        </ul> -->
+        </ul>
 
+        <header>
+            <input type='search' v-model="search" placeholder="Search" v-on:change="searchChanged($event)"/>
+        </header>
+        
         <ul>
             <li v-for="productDetails in displayedProducts">
-                <product-details v-bind:product="productDetails"
-                                    v-bind:productSearch="search"></product-details>
+                <single-product v-bind:product="productDetails"
+                                v-bind:productSearch="search"></single-product>
             </li>
         </ul>
 
@@ -32,6 +36,7 @@
     import {client} from '../services/shopify-client';
     import Product from "./ProductDetails";
     import SkeletonLoading from "./SkeletonLoading";
+    import Product from "./SingleProduct";
 
     export default {
         name: 'ProductsList',
@@ -39,10 +44,9 @@
             ProductDetails: Product,
             Loading: SkeletonLoading
         },
-        data: function () {
+        components: {'single-product': Product, Spinner},
             return {
-                search: '',
-                displayedProducts: []
+                search: '', displayedProducts: []
             };
         },
         computed: {
@@ -56,25 +60,28 @@
         },
         methods: {
             searchChanged(event) {
-                console.log('search change event', event)
                 this.search = event.target.value;
                 this.getProducts();
             },
             getProducts: async function () {
-                console.log('Get products')
 
                 this.displayedProducts = this.search ?
-                    this.products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0):
+                    this.products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0) :
                     this.products;
 
-                let products = await client.product.fetchAll(100)
-                console.log('products', products);
+                let products = await client.product.fetchAll(20)
                 if (this.search) {
-                    console.log('filtering products by', this.search)
                     products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
                 }
+                this.displayedProducts = products;
+
+                products = await client.product.fetchAll(100)
+                if (this.search) {
+                    products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
+                }
+
+
                 this.$store.commit('setProducts', products);
-                this.displayedProducts  = this.products;
 
             }
         }
@@ -84,15 +91,25 @@
 </script>
 
 <style scoped lang="scss">
+    .loader {
+        display: none;
+    }
+
     h3 {
         margin: 40px 0 0;
     }
 
-    input[type='search'] {
-        border-radius: 20px;
-        border: solid lightblue;
-        line-height: 2;
+    header {
+    }
 
+    input[type='search'] {
+        display: block;
+        border: 1px solid #AAA;
+        border-radius: 3px;
+        padding: 1em;
+        width: 500px;
+        margin: 0 auto;
+        font-size: 1.3em;
     }
 
     ul {
@@ -102,6 +119,12 @@
         grid-gap: 1vw;
         padding: 1vw;
         list-style-type: none;
+
+        &:empty ~ .loader {
+            display: block;
+            text-align: center;
+            margin: 5em 0;
+        }
     }
 
     li {
