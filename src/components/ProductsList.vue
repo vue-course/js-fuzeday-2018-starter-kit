@@ -1,27 +1,50 @@
 <template>
     <div>
+        <input type='search' v-model="search" v-on:change="searchChanged($event)"/>
+        <ul v-if="!displayedProducts.length">
+            <li v-for="item in 10" class="loading">
+                <loading :height="100" />
+                <loading />
+                <loading />
+                <loading />
+            </li>
+        </ul>
+
         <header>
             <input type='search' v-model="search" placeholder="Search" v-on:change="searchChanged($event)"/>
         </header>
+        
         <ul>
             <li v-for="productDetails in displayedProducts">
                 <single-product v-bind:product="productDetails"
                                 v-bind:productSearch="search"></single-product>
             </li>
         </ul>
-        <!--<mt-spinner class='loader' type="triple-bounce" color="red" size="100"></mt-spinner>-->
+
+
+        <ul>
+            <li v-for="productDetails in displayedProducts">
+                <product-details v-bind:product="productDetails" :search="search"
+                                 v-bind:productSearch="search"></product-details>
+            </li>
+        </ul>
+
     </div>
 </template>
 
 <script>
     import {client} from '../services/shopify-client';
+    import Product from "./ProductDetails";
+    import SkeletonLoading from "./SkeletonLoading";
     import Product from "./SingleProduct";
-    import {Spinner} from 'mint-ui';
 
     export default {
         name: 'ProductsList',
+        components: {
+            ProductDetails: Product,
+            Loading: SkeletonLoading
+        },
         components: {'single-product': Product, Spinner},
-        data: function () {
             return {
                 search: '', displayedProducts: []
             };
@@ -113,5 +136,8 @@
             z-index: 10;
         }
         // width: calc(100% / 6);
+    }
+    .loading {
+        margin-bottom: 5%;
     }
 </style>
