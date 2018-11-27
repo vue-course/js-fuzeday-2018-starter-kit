@@ -1,14 +1,14 @@
 <template>
     <div>
         <input type='search' v-model="search" v-on:change="searchChanged($event)"/>
-        <!-- <ul v-if="!displayedProducts.length">
+        <ul v-if="!displayedProducts.length">
             <li v-for="item in 10" class="loading">
                 <loading :height="100" />
                 <loading />
                 <loading />
                 <loading />
             </li>
-        </ul> -->
+        </ul>
 
         <ul>
             <li v-for="productDetails in displayedProducts">
