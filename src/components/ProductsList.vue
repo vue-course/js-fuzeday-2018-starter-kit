@@ -55,12 +55,20 @@
                     this.products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0):
                     this.products;
 
-                let products = await client.product.fetchAll(100)
+                let products = await client.product.fetchAll(20)
+                if (this.search) {
+                    products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
+                }
+                this.displayedProducts = products;
+
+                products = await client.product.fetchAll(100)
                 console.log('products', products);
                 if (this.search) {
                     console.log('filtering products by', this.search)
                     products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
                 }
+
+
                 this.$store.commit('setProducts', products);
                 this.displayedProducts  = this.products;
 
