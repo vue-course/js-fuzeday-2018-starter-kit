@@ -47,16 +47,16 @@
                 this.search = event.target.value;
                 this.getProducts();
             },
-            getProducts: function () {
+            getProducts: async function () {
                 console.log('Get products')
-                client.product.fetchAll(30)
-                    .then((products) => {
-                        if (this.search) {
-                            console.log('filtering products by', this.search)
-                            products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
-                        }
-                        this.$store.commit('setProducts', products);
-                    });
+                let products = await client.product.fetchAll(30)
+
+                if (this.search) {
+                    console.log('filtering products by', this.search)
+                    products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
+                }
+                this.$store.commit('setProducts', products);
+
             }
         }
 
