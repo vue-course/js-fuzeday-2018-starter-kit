@@ -33,9 +33,10 @@
     .product{
         &-item{
             display: block;
-            margin: 5%;
+            margin-bottom: 5%;
             padding: 5%;
-            height: 100%;
+            width: 100%;
+            min-height: 100%;
             box-sizing: inherit;
             border-radius: 3px;
             transition: .12s ease-out;
@@ -44,7 +45,7 @@
 
             &:hover{
                 box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 4px 20px rgba(0,0,0,.2);
-                position: relative;
+                position: absolute;
                 z-index: 10;
 
                 .product-title{
