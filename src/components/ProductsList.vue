@@ -2,7 +2,7 @@
     <div>
         <ul v-if="!products.length">
             <li v-for="item in 10" class="loading">
-                <loading :height="100" />
+                <loading :height="180" />
                 <loading />
                 <loading />
                 <loading />
@@ -75,6 +75,6 @@
         // width: calc(100% / 6);
     }
     .loading {
-        margin-bottom: 5%;
+        margin: 5%;
     }
 </style>
