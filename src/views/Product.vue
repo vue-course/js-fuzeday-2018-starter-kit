@@ -1,21 +1,20 @@
 <template>
     <div>
-        Product {{ $route.params.id }}
-        <p>{{ name }}</p>
-        <p>{{ desc }}</p>
+        ID {{ $route.params.id }}
+        <p>product {{ product }}</p>
     </div>
 </template>
 
 <script>
-export default {
-    name: 'Product',
-    data() {
-        return {
-            name: 'name',
-            desc: 'desc',
-        }
+    export default {
+        name: 'Product',
+        computed: {
+            product() {
+                const { id } = this.$route.params;
+                return this.$store.getters.getProduct(id);
+            }
+        },
     }
-}
 </script>
 
 <style lang="scss" scoped>
