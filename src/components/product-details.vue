@@ -1,8 +1,10 @@
 <template>
     <div v-if="product">
 
-        <h3 class="product-title" :title="product.title">{{product.title}}</h3>
-        <img class="product-image" :src="imageUrl"/>
+        <a router-link :to="product.id"><h3 router-link class="product-title" :title="product.title">
+            {{product.title}}</h3>
+            <img class="product-image" :src="imageUrl"/>
+        </a>
     </div>
 </template>
 
@@ -19,11 +21,14 @@
 </script>
 
 <style scoped>
-    .product-title{
+    .product-title {
         width: 250px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;;
+    }
+    a  {
+        cursor: pointer;
     }
 
     .product-image {
