@@ -9,6 +9,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "mint-ui": "^2.2.13",
     "shopify-buy": "^1.9.1",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
