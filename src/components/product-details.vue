@@ -1,9 +1,9 @@
 <template>
     <div v-if="product">
-
-        <a router-link :to="product.id"><h3 router-link class="product-title" :title="product.title">
-            {{product.title}}</h3>
+        <a router-link :to="product.id">
             <img class="product-image" :src="imageUrl"/>
+            <h3 router-link class="product-title" :title="product.title">{{product.title}}</h3>
+            <h4 class='item-price'>{{product.price}}</h4>
         </a>
     </div>
 </template>
@@ -13,6 +13,7 @@
         name: "product-details",
         computed: {
             imageUrl() {
+            console.log(this.product)
                 return this.product.images[0] ? this.product.images[0].src : null;
             }
         },
