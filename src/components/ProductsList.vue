@@ -38,16 +38,30 @@
         },
         data: function () {
             return {
-                products: [],
                 productSearch: this.$route.params.productSearch
             };
         },
-        mounted: function () {
-            client.product.fetchAll(30, this.productSearch || undefined)
-                .then((products) => {
-                    this.$store.commit('setProducts', products);
-                });
+        computed: {
+            products() {
+                return this.$store.getters.getProducts;
+            }
         },
+        mounted: function () {
+         this.getProducts();
+        },
+
+        methods: {
+            getProducts: function() {
+                client.product.fetchAll(30)
+                    .then((products) => {
+                        if (this.productSearch) {
+                            console.log('filtering products by', this.productSearch)
+                            products = products.filter(prod => prod.title.toLowerCase().indexOf(this.productSearch.toLowerCase()) >= 0)
+                        }
+                        this.$store.commit('setProducts', products);
+                    });
+            }
+        }
 
 
 
