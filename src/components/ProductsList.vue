@@ -12,7 +12,7 @@
             Products
             <ul>
                 <li v-for="productDetails in products">
-                    <product-details v-bind:product="productDetails"
+                    <product-details v-bind:product="productDetails" :search="search"
                                      v-bind:productSearch="search"></product-details>
                 </li>
             </ul>
@@ -49,8 +49,8 @@
             },
             getProducts: async function () {
                 console.log('Get products')
-                let products = await client.product.fetchAll(30)
-
+                let products = await client.product.fetchAll(100)
+                console.log('products', products);
                 if (this.search) {
                     console.log('filtering products by', this.search)
                     products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)

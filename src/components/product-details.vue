@@ -6,11 +6,16 @@
             <span>$</span>
             <span>{{product.variants[0].price}}</span>
         </div>
-        <div router-link class="product-title">{{markBySearch(productSearch, product.title)}}</div>
+        <div router-link  v-highlight="{keyword: search}" class="product-title">{{ product.title}}</div>
     </router-link>
 </template>
 
 <script>
+    import Vue from 'vue';
+    import highlight from 'vue-highlight-text/public/directive.min.js';
+
+    Vue.directive('highlight', highlight);
+
     export default {
         name: "product-details",
         computed: {
@@ -32,7 +37,7 @@
               return title;
           }
         },
-        props: ['product', 'displayMode', 'productSearch']
+        props: ['product', 'displayMode', 'search']
     }
 </script>
 
