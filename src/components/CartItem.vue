@@ -56,14 +56,13 @@
 
 <style scoped lang="scss">
 	.cart-item {
-		height: 200px;
-		margin: 15px;
-		padding: 10px;
+		margin: 1em 0;
+		padding: 1em;
 		display: flex;
-		box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.2);
+		border-radius: 4px;
+		border: 1px solid #DDD;
 
 		&:hover {
-			background: #f7f6f6;
 		}
 
 		.image {
@@ -110,6 +109,10 @@
 
 			.mint-button {
 				display: inline-block;
+				&:hover{
+					background: #ef4f4f;
+					color: white;
+				}
 			}
 
 			.quantity-text {

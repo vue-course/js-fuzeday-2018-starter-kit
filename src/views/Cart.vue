@@ -7,6 +7,9 @@
         <cart-item v-bind:data="item" />
       </li>
     </ul>
+    <footer>
+      <mt-button type="primary" size="large">Pay Now</mt-button>
+    </footer>
   </div>
 </template>
 
@@ -14,7 +17,7 @@
 import CartItem from '@/components/CartItem.vue'
 
 export default {
-    name: 'Cart',
+  name: 'Cart',
 	computed: {
 		items() {
       return this.$store.getters.getProductsByIds;
@@ -32,10 +35,21 @@ export default {
       list-style: none;
       padding: 0;
     }
-    .empty {
-      text-align: center; 
-      font-size: 2em;
-      padding-top: 1em;
+  }
+
+  footer{
+    display: flex;
+    margin-top: 2em;
+
+    button{
+      max-width: 200px;
+      margin-left: auto;
     }
+  }
+
+  .empty {
+    text-align: center;
+    font-size: 2em;
+    padding-top: 1em;
   }
 </style>
