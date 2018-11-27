@@ -106,7 +106,7 @@ import CartQuantity from '../components/CartQuantity.vue';
 
     .product-price{
         font-size: 2.5em;
-        color: red;
+        color: #06EF81;
     }
 
     .product-desc{
