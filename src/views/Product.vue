@@ -50,7 +50,7 @@ import CartQuantity from '../components/CartQuantity.vue';
         methods: {
             async addToCart() {
                 const { id } = this.$route.params;
-                const addToCart = await this.$store.dispatch('add', id, this.qty);
+                const addToCart = await this.$store.dispatch('add', { id, qty: this.qty });
                 this.qty = 1;
             }
         }
