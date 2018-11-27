@@ -96,6 +96,8 @@ export default {
     }
 
     .cart-btn{
+        display: inline-flex;
+        align-items: center;
         span{
             font-size: 1.6em;
             margin-left: .5em;
