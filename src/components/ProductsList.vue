@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ul v-if="!displayedProducts.length">
+        <ul v-if="!products.length">
             <li v-for="item in 10" class="loading">
                 <loading :height="180" />
                 <loading />
@@ -9,7 +9,7 @@
             </li>
         </ul>
         <ul>
-            <li v-for="productDetails in displayedProducts">
+            <li v-for="productDetails in products">
                 <single-product v-bind:product="productDetails" :search="search"
                                  v-bind:productSearch="search"></single-product>
             </li>
@@ -18,7 +18,6 @@
 </template>
 
 <script>
-    import {client} from '../services/shopify-client';
     import SkeletonLoading from "./SkeletonLoading";
     import SingleProduct from "./SingleProduct";
 
@@ -40,7 +39,7 @@
             }
         },
         mounted: function () {
-            this.getProducts();
+         //   this.getProducts();
         }
     }
 </script>
