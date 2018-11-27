@@ -1,13 +1,11 @@
 <template>
-    <a router-link :to="product.id" v-if="product" :title="product.title" class="product-item">
-        <img class="product-image" :src="imageUrl"/>
-        <div class='product-price'>
-            <span>US </span>
-            <span>$</span>
-            <span>{{product.variants[0].price}}</span>
-        </div>
-        <div router-link class="product-title">{{product.title}}</div>
-    </a>
+    <div v-if="product">
+        <router-link :to="product.id">
+            <img class="product-image" :src="imageUrl"/>
+            <h3 router-link class="product-title" :title="product.title">{{product.title}}</h3>
+            <h4 class='item-price'>{{product.price}}</h4>
+        </router-link>
+    </div>
 </template>
 
 <script>
