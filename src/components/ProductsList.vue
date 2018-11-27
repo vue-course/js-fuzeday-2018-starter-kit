@@ -1,12 +1,13 @@
 <template>
-    <div class="hello">
+    <div>
         <input type='search' v-model="search" v-on:change="searchChanged($event)"/>
-
         <ul>
             <li v-for="productDetails in products">
-                <product-details v-bind:product="productDetails"></product-details>
+                <product-details v-bind:product="productDetails"
+                                    v-bind:productSearch="search"></product-details>
             </li>
         </ul>
+
 
 
         <ul>
