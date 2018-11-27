@@ -1,6 +1,7 @@
 <template>
     <header>
-
+        Header
+        <router-link to="/cart">Cart</router-link>
     </header>
 </template>
 

@@ -9,6 +9,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "lodash": "^4.17.11",
     "mint-ui": "^2.2.13",
     "shopify-buy": "^1.9.1",
     "vue": "^2.5.17",
