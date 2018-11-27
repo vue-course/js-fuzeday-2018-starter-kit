@@ -1,11 +1,13 @@
 <template>
-    <div v-if="product">
-        <router-link :to="product.id">
-            <img class="product-image" :src="imageUrl"/>
-            <h3 router-link class="product-title" :title="product.title">{{product.title}}</h3>
-            <h4 class='item-price'>{{product.price}}</h4>
-        </router-link>
-    </div>
+    <router-link :to="{ name: 'product', params: { id: product.id }}">
+        <img class="product-image" :src="imageUrl"/>
+        <div class='product-price'>
+            <span>US </span>
+            <span>$</span>
+            <span>{{product.variants[0].price}}</span>
+        </div>
+        <div router-link class="product-title">{{product.title}}</div>
+    </router-link>
 </template>
 
 <script>

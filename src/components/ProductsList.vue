@@ -15,6 +15,14 @@
             <!--<li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>-->
             <!--<li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>-->
         <!--</ul>-->
+        <h3>
+            Products
+            <ul>
+                <li v-for="productDetails in products">
+                    <product-details v-bind:product="productDetails"></product-details>
+                </li>
+            </ul>
+        </h3>
     </div>
 </template>
 
@@ -23,7 +31,7 @@
     import Product from "./product-details";
 
     export default {
-        name: 'HelloWorld',
+        name: 'ProductsList',
         components: {'product-details': Product},
         props: {
             msg: String
@@ -37,9 +45,7 @@
         mounted: function () {
             client.product.fetchAll(30, this.productSearch || undefined)
                 .then((products) => {
-                    // Do something with the products
-                    console.log(products);
-                    this.products = products;
+                    this.$store.commit('setProducts', products);
                 });
         },
 
