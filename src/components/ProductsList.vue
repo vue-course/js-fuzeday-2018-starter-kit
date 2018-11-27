@@ -63,8 +63,9 @@
 
     ul {
         display: grid;
-        grid-gap: 1%;
+        // grid-gap: 1%;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-auto-rows: 1fr;
 
         list-style-type: none;
         padding: 1%;

@@ -33,24 +33,48 @@
     .product{
         &-item{
             display: block;
+            margin: 5%;
             padding: 5%;
+            height: 100%;
+            box-sizing: inherit;
+            border-radius: 3px;
+            transition: .12s ease-out;
+
             cursor: pointer;
 
             &:hover{
-                box-shadow: 0 0 0 1px #CCC;
+                box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 4px 20px rgba(0,0,0,.2);
+                position: relative;
+                z-index: 10;
+
+                .product-title{
+                    -webkit-line-clamp: 20;
+                }
+
+                .product-image{
+                    transform: none;
+                }
             }
         }
 
         &-title {
             font-weight: 400;
+            width: 100%;
             /* white-space: nowrap;
             overflow: hidden;
-            text-overflow: ellipsis;; */
+            text-overflow: ellipsis; */
+
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         &-image {
             display: block;
             width: 100%;
+            transition: .12s ease-out;
+            transform: scale(.9);
         }
 
         &-price{
