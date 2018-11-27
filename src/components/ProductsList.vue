@@ -1,25 +1,19 @@
 <template>
     <div class="hello">
-       Product search: {{$route.params.productSearch}}
+        <input type='search' v-model="search" v-on:change="searchChanged($event)"/>
+
         <ul>
             <li v-for="productDetails in products">
                 <product-details v-bind:product="productDetails"></product-details>
             </li>
         </ul>
-        <!--<h3>Ecosystem</h3>-->
-        <!--<ul>-->
-            <!--<li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>-->
-            <!--<li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>-->
-            <!--<li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank"-->
-                   <!--rel="noopener">vue-devtools</a></li>-->
-            <!--<li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>-->
-            <!--<li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>-->
-        <!--</ul>-->
+
         <h3>
             Products
             <ul>
                 <li v-for="productDetails in products">
-                    <product-details v-bind:product="productDetails"></product-details>
+                    <product-details v-bind:product="productDetails"
+                                     v-bind:productSearch="search"></product-details>
                 </li>
             </ul>
         </h3>
@@ -35,31 +29,36 @@
         components: {'product-details': Product},
         data: function () {
             return {
-                productSearch: this.$route.params.productSearch
+                search: ''
             };
         },
         computed: {
             products() {
                 return this.$store.getters.getProducts;
-            }
+            },
+
         },
         mounted: function () {
-         this.getProducts();
+            this.getProducts();
         },
-
         methods: {
-            getProducts: function() {
+            searchChanged(event) {
+                console.log('search change event', event)
+                this.search = event.target.value;
+                this.getProducts();
+            },
+            getProducts: function () {
+                console.log('Get products')
                 client.product.fetchAll(30)
                     .then((products) => {
-                        if (this.productSearch) {
-                            console.log('filtering products by', this.productSearch)
-                            products = products.filter(prod => prod.title.toLowerCase().indexOf(this.productSearch.toLowerCase()) >= 0)
+                        if (this.search) {
+                            console.log('filtering products by', this.search)
+                            products = products.filter(prod => prod.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
                         }
                         this.$store.commit('setProducts', products);
                     });
             }
         }
-
 
 
     }
@@ -68,6 +67,13 @@
 <style scoped lang="scss">
     h3 {
         margin: 40px 0 0;
+    }
+
+    input[type='search'] {
+        border-radius: 20px;
+        border: solid lightblue;
+        line-height: 2;
+
     }
 
     ul {
@@ -83,7 +89,7 @@
         box-sizing: border-box;
         background: white;
 
-        &:hover{
+        &:hover {
             position: relative;
             z-index: 10;
         }

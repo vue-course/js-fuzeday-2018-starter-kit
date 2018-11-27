@@ -1,7 +1,7 @@
 <template>
     <header>
         <div class='searchWrap'>
-            <input type='search' v-model="searchText" v-on:change="searchChanged()"/>
+            <!--<input type='search' v-model="searchText" v-on:change="searchChanged()"/>-->
         </div>
     </header>
     <!-- <div class="navbar">
@@ -13,7 +13,7 @@
 <script>
     export default {
         data() {
-            return {searchText: ''}
+            return {searchText: this.$route.params.productSearch}
         },
         methods: {
             searchChanged() {
