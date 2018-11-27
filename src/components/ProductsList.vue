@@ -12,14 +12,11 @@
             <!--<li><a href="https://www.npmjs.com/package/shopify-buy" target="_blank" rel="noopener">Shopify SDK</a></li>-->
 
         <!--</ul>-->
-        <h3>
-            Products
-            <ul>
-                <li v-for="productDetails in products">
-                    <product-details v-bind:product="productDetails"></product-details>
-                </li>
-            </ul>
-        </h3>
+        <ul>
+            <li v-for="productDetails in products">
+                <product-details v-bind:product="productDetails"></product-details>
+            </li>
+        </ul>
         <!--<h3>Ecosystem</h3>-->
         <!--<ul>-->
             <!--<li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>-->
@@ -65,12 +62,16 @@
     }
 
     ul {
+        display: grid;
+        grid-gap: 1%;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
         list-style-type: none;
-        padding: 0;
+        padding: 1%;
     }
 
     li {
-        display: inline-block;
-        margin: 0 10px;
+        box-sizing: border-box;
+        // width: calc(100% / 6);
     }
 </style>
