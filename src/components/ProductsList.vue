@@ -8,15 +8,14 @@
             </li>
         </ul>
 
-        <h3>
-            Products
-            <ul>
-                <li v-for="productDetails in products">
-                    <product-details v-bind:product="productDetails" :search="search"
-                                     v-bind:productSearch="search"></product-details>
-                </li>
-            </ul>
-        </h3>
+
+        <ul>
+            <li v-for="productDetails in products">
+                <product-details v-bind:product="productDetails" :search="search"
+                                 v-bind:productSearch="search"></product-details>
+            </li>
+        </ul>
+
     </div>
 </template>
 
