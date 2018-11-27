@@ -9,7 +9,7 @@
                                 v-bind:productSearch="search"></single-product>
             </li>
         </ul>
-        <mt-spinner class='loader' type="triple-bounce" color="red" size="100"></mt-spinner>
+        <!--<mt-spinner class='loader' type="triple-bounce" color="red" size="100"></mt-spinner>-->
     </div>
 </template>
 
