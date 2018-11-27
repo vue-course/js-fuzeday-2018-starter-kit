@@ -1,5 +1,5 @@
 <template>
-    <a router-link :to="product.id" v-if="product" :title="product.title" class="product-item">
+    <router-link :to="{ name: 'product', params: { id: product.id }}">
         <img class="product-image" :src="imageUrl"/>
         <div class='product-price'>
             <span>US </span>
@@ -7,7 +7,7 @@
             <span>{{product.variants[0].price}}</span>
         </div>
         <div router-link class="product-title">{{product.title}}</div>
-    </a>
+    </router-link>
 </template>
 
 <script>
