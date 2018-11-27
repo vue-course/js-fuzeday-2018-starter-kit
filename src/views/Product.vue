@@ -12,6 +12,7 @@
                         <small>$</small>
                         <span>{{product.variants[0].price}}</span>
                     </div>
+                    <cart-quantity :quantity.sync="qty" />
                     <mt-button @click="addToCart" type="primary" size="large">Add to Cart</mt-button>
                 </div>
             </div>
@@ -23,13 +24,23 @@
 </template>
 
 <script>
-    import { Button } from 'mint-ui';
+import CartQuantity from '../components/CartQuantity.vue';
 
     export default {
         name: 'Product',
+        props: {
+            quantity: {
+                default: 1
+            }
+        },
         components: {
-			Button
-		},
+            'cart-quantity': CartQuantity
+        },
+        data() {
+            return {
+                qty: this.quantity
+            }
+        },
         computed: {
             product() {
                 const { id } = this.$route.params;
@@ -37,9 +48,10 @@
             }
         },
         methods: {
-            addToCart() {
+            async addToCart() {
                 const { id } = this.$route.params;
-                console.log('add', id);
+                const addToCart = await this.$store.dispatch('add', id, this.qty);
+                this.qty = 1;
             }
         }
     }
@@ -99,5 +111,8 @@
 
     .product-desc{
         font-size: 1.3em;
+    }
+    button {
+        margin: 10px 0;
     }
 </style>
