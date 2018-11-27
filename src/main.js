@@ -3,7 +3,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import MintUI from 'mint-ui'
-import './styles/normalize.scss';
 import './styles/main.scss';
 import 'mint-ui/lib/style.css'
 
