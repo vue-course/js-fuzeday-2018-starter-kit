@@ -1,8 +1,8 @@
 <template>
     <div v-if="product">
 
-        <h3 :title="product.title">{{product.title}}</h3>
-        <img :src="imageUrl"/>
+        <h3 class="product-title" :title="product.title">{{product.title}}</h3>
+        <img class="product-image" :src="imageUrl"/>
     </div>
 </template>
 
@@ -19,7 +19,15 @@
 </script>
 
 <style scoped>
-    .product-title P{
-        text-overflow-ellipsis: true;
+    .product-title{
+        width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;;
+    }
+
+    .product-image {
+        width: 10em;
+        height: 10em;
     }
 </style>
