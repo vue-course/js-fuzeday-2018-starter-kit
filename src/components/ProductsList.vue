@@ -62,15 +62,16 @@
     }
 
     ul {
+        display: grid;
+        grid-gap: 1%;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
         list-style-type: none;
-        padding: 0;
+        padding: 1%;
     }
 
     li {
         box-sizing: border-box;
-        display: inline-block;
-        vertical-align: top;
-        padding: 1%;
-        width: calc(100% / 6);
+        // width: calc(100% / 6);
     }
 </style>

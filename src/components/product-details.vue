@@ -1,15 +1,13 @@
 <template>
-    <div v-if="product" :title="product.title" class="product-item">
-        <a router-link :to="product.id">
-            <img class="product-image" :src="imageUrl"/>
-            <h3 router-link class="product-title">{{product.title}}</h3>
-            <h4 class='product-price'>
-                <span>US </span>
-                <span>$</span>
-                <span>{{product.variants[0].price}}</span>
-            </h4>
-        </a>
-    </div>
+    <a router-link :to="product.id" v-if="product" :title="product.title" class="product-item">
+        <img class="product-image" :src="imageUrl"/>
+        <div class='product-price'>
+            <span>US </span>
+            <span>$</span>
+            <span>{{product.variants[0].price}}</span>
+        </div>
+        <div router-link class="product-title">{{product.title}}</div>
+    </a>
 </template>
 
 <script>
@@ -32,22 +30,33 @@
 </script>
 
 <style scoped lang="scss">
-    .product-item{
+    .product{
+        &-item{
+            display: block;
+            padding: 5%;
+            cursor: pointer;
 
-    }
+            &:hover{
+                box-shadow: 0 0 0 1px #CCC;
+            }
+        }
 
-    .product-title {
-        font-weight: 400;
-        /* white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;; */
-    }
-    a  {
-        cursor: pointer;
-    }
+        &-title {
+            font-weight: 400;
+            /* white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;; */
+        }
 
-    .product-image {
-        width: 10em;
-        height: 10em;
+        &-image {
+            display: block;
+            width: 100%;
+        }
+
+        &-price{
+            text-align: center;
+            font-size: 1.6em;
+            margin: .6em 0;
+        }
     }
 </style>
